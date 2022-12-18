@@ -1,0 +1,37 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'java'
+}
+
+group 'net.aariy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation 'club.minnced:discord-webhooks:0.8.2'
+    implementation 'net.dv8tion:JDA:5.0.0-beta.1'
+}
+
+jar {
+    //noinspection GroovyAssignabilityCheck
+    manifest {
+        attributes "Main-Class": "net.aariy.Main"
+    }
+}
+
+
+shadowJar {
+    archiveFileName = "ane.jar"
+}
+
+classes {
+    finalizedBy "shadowJar"
+}
+
+
+task stage(dependsOn: 'shadowJar') {}
+//noinspection GroovyAssignabilityCheck
+tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
