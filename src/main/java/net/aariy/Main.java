@@ -44,6 +44,7 @@ public class Main extends ListenerAdapter
         {
             node.removeAll();
             reload();
+            e.reply(":white_check_mark: 回数をリセットしました。").setEphemeral(true).queue();
         }
         if (node.get(e.getUser().getId()) != null && node.get(e.getUser().getId()).asInt() <= 2)
         {
