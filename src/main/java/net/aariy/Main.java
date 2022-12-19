@@ -25,7 +25,7 @@ public class Main extends ListenerAdapter
     public static ObjectNode node;
     public static void main(String[] args) throws IOException
     {
-        JDA jda = JDABuilder.createDefault("MTA1NDQ0OTYyMTM5ODcyMDY5NA.GbAZ9s.u8NJCQdqg2k3-sR8Qpc2DDstACCHawWzhyId0M").enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES).setMemberCachePolicy(MemberCachePolicy.ALL).build();
+        JDA jda = JDABuilder.createDefault(args[0]).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES).setMemberCachePolicy(MemberCachePolicy.ALL).build();
         jda.updateCommands().addCommands(
                 Commands.slash("random", "ランダムにスロットを表示します。")
         ).queue();
