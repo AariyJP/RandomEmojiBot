@@ -18,6 +18,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main extends ListenerAdapter
@@ -35,6 +39,25 @@ public class Main extends ListenerAdapter
         if (new File("data.json").exists()) FILE = new File("data.json");
         else FILE = new File("build/resources/main/data.json");
         node = new ObjectMapper().readTree(FILE).deepCopy();
+        Timer timer = new Timer();
+        Calendar cl = Calendar.getInstance();
+        cl.add(Calendar.DATE, 1);
+        cl.set(Calendar.HOUR_OF_DAY, 0);
+        cl.set(Calendar.MINUTE, 0);
+        cl.set(Calendar.SECOND, 0);
+        cl.set(Calendar.MILLISECOND, 0);
+        TimerTask[] task = {
+                new TimerTask()
+                {
+                    public void run()
+                    {
+                        node.removeAll();
+                        reload();
+                    }
+                }
+        };
+        timer.schedule(task[0], cl.getTime(), TimeUnit.DAYS.toMillis(1));
+
     }
 
     @Override
