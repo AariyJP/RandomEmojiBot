@@ -24,7 +24,7 @@ jar {
 
 
 shadowJar {
-    archiveFileName = "ane.jar"
+    archiveFileName = "RandomEmojiBot.jar"
 }
 
 classes {

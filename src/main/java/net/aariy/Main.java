@@ -46,20 +46,21 @@ public class Main extends ListenerAdapter
             reload();
             e.reply(":white_check_mark: 回数をリセットしました。").setEphemeral(true).queue();
         }
-        if (node.get(e.getUser().getId()) != null && node.get(e.getUser().getId()).asInt() <= 2)
+        else if (node.get(e.getUser().getId()) != null && node.get(e.getUser().getId()).asInt() >= 2)
+        {
+            e.reply(":warning: 既に2回スロットを回しています。").setEphemeral(true).queue();
+
+        }
+        else
         {
             SecureRandom sc = new SecureRandom();
             String[] list = {"<:image0_21:1051895319224406097>", "❤️", "😗", "🐵", "💸", "🤪", "🙊"};
-            e.reply(list[sc.nextInt(10)]+" "+list[sc.nextInt(10)]+" "+list[sc.nextInt(10)]).queue();
-            if(node.get(e.getUser().getId()) != null)
+            e.reply(list[sc.nextInt(7)]+" "+list[sc.nextInt(7)]+" "+list[sc.nextInt(7)]).queue();
+            if(node.get(e.getUser().getId()) == null)
                 node.put(e.getUser().getId(), 1);
             else
                 node.put(e.getUser().getId(), node.get(e.getUser().getId()).asInt()+1);
             reload();
-        }
-        else
-        {
-            e.reply(":warning: 既に2回スロットを回しています。").setEphemeral(true).queue();
         }
     }
     public static void reload()
